@@ -143,7 +143,9 @@ task "console" do
   exec "pry -r./config/environment"
 end
 
-desc "Run the specs"
-RSpec::Core::RakeTask.new(:spec)
+unless Sinatra::Application.environment == :production
+  desc "Run the specs"
+  RSpec::Core::RakeTask.new(:spec)
 
-task :default  => :spec
+  task :default  => :spec
+end
