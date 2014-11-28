@@ -3,6 +3,9 @@
 #      http://stackoverflow.com/questions/7243486/why-do-you-need-require-bundler-setup
 ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', __FILE__)
 
+require 'dotenv'
+Dotenv.load
+
 require 'bundler/setup' if File.exists?(ENV['BUNDLE_GEMFILE'])
 
 # Require gems we care about
@@ -19,6 +22,7 @@ require 'sinatra'
 require "sinatra/reloader" if development?
 
 require 'erb'
+require 'haml'
 require 'bcrypt'
 
 # Some helper constants for path-centric logic
@@ -32,8 +36,9 @@ configure do
   set :root, APP_ROOT.to_path
   # See: http://www.sinatrarb.com/faq.html#sessions
   enable :sessions
-  set :session_secret, ENV['SESSION_SECRET'] || 'this is a secret shhhhh'
-
+  set :session_secret, ENV['SESSION_SECRET']
+  # Set haml as default engine
+  set :haml, :format => :html5
   # Set the views to
   set :views, File.join(Sinatra::Application.root, "app", "views")
 end

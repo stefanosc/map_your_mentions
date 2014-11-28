@@ -7,6 +7,9 @@ gem 'pg'
 gem 'sinatra'
 gem 'sinatra-contrib'
 
+gem "dotenv"
+gem 'haml'
+
 # Use Thin for our web server
 gem 'thin'
 
@@ -15,6 +18,7 @@ gem 'activerecord', '~>4.1'
 
 gem 'rake'
 gem 'bcrypt-ruby'
+
 
 
 group :test do
